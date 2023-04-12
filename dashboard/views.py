@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect, get_object_or_404
 import pandas as pd
 import numpy as np
-from .models import Records, Organisation_master, Student, Teacher,Class
+from .models import Records
 import plotly.express as px
 import dash
 from dash import dcc, html
@@ -110,11 +110,16 @@ def only_stud(request):
 item = Records.objects.values('id','No','Name','Internal','External','Subject','Semester','Total')
 df2 = pd.DataFrame(item)
 
+try:
 
-r = 'SEM_VI'
-z4 = df2.query('Semester == @r') 
-figg = px.pie(z4, names = "Subject", values = "Total",height = 500, width = 1000, title="Marks Distribution According to Subjects in 6th Semester")
+    r = 'SEM_VI'
+    z4 = df2.query('Semester == @r') 
+    figg = px.pie(z4, names = "Subject", values = "Total",height = 500, width = 1000, title="Marks Distribution According to Subjects in 6th Semester")
 
+except:
+    r = 'SEM_VI'
+    z4 = df2 
+    figg = px.pie(z4, names = "Subject", values = "Total",height = 500, width = 1000, title="Marks Distribution According to Subjects in 6th Semester")
 
 
 
@@ -320,76 +325,76 @@ def Semester_form(request):
 
 
 
-def org_form(request):
-    if request.method == 'POST':
-        name = request.POST.get('orgname')
-        if Organisation_master.objects.filter(org_name = name).exists():
-            pass
-        else:
-            z = Organisation_master(org_name = name)
-            z.save()
+# def org_form(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('orgname')
+#         if Organisation_master.objects.filter(org_name = name).exists():
+#             pass
+#         else:
+#             z = Organisation_master(org_name = name)
+#             z.save()
 
-    return render(request,'organisation_form.html')
-
-
-
-def student_form(request):
-    organisations = Organisation_master.objects.values().all()
-    print(organisations)
-    if request.method == 'POST':
-        org = request.POST.get('org')
-        id = request.POST.get('idno')
-        name = request.POST.get('student_name')
-        if Student.objects.filter(uid_no = id,student_name = name, Organisation = org).exists():
-            pass
-        else:
-            z = Student(uid_no = id,student_name = name, Organisation = org)
-            z.save()
-
-    return render(request,'student_form.html',{'menu_list':organisations})
-
-def teacher_form(request):
-    organisations = Organisation_master.objects.values().all()
-    print(organisations)
-    if request.method == 'POST':
-        org = request.POST.get('org')
-        name = request.POST.get('teacher_name')
-        if Teacher.objects.filter(teacher_name = name, Organisation = org).exists():
-            pass
-        else:
-            z = Teacher(teacher_name = name, Organisation = org)
-            z.save()
-
-    return render(request,'teacher_form.html',{'menu_list':organisations})
-
-def class_form(request):
-    organisations = Organisation_master.objects.values().all()
-    print(organisations)
-    if request.method == 'POST':
-        org = request.POST.get('org')
-        name = request.POST.get('standard')
-        if Class.objects.filter(class_n = name, Organisation = org).exists():
-            pass
-        else:
-            z = Class(class_n = name, Organisation = org)
-            z.save()
-
-    return render(request,'class_form.html',{'menu_list':organisations})
+#     return render(request,'organisation_form.html')
 
 
-def subjects_form(request):
-    # organisations = Organisation_master.objects.values().all()
-    # classes = Class.objects.values().all()
-    # print(organisations)
-    # if request.method == 'POST':
-    #     org = request.POST.get('org')
-    #     subject = request.POST.get('sub_n')
-    #     stan = request.POST.get('std')
-    #     if Subjects.objects.filter(subject_n = subject, Organisation = org, standard = stan).exists():
-    #         pass
-    #     else:
-    #         z = Subjects(subject_n = subject, Organisation = org, standard = stan)
-    #         z.save()
-    return render(request,'subjects_form.html')
 
-from .forms import SearchContactForm
+# def student_form(request):
+#     organisations = Organisation_master.objects.values().all()
+#     print(organisations)
+#     if request.method == 'POST':
+#         org = request.POST.get('org')
+#         id = request.POST.get('idno')
+#         name = request.POST.get('student_name')
+#         if Student.objects.filter(uid_no = id,student_name = name, Organisation = org).exists():
+#             pass
+#         else:
+#             z = Student(uid_no = id,student_name = name, Organisation = org)
+#             z.save()
+
+#     return render(request,'student_form.html',{'menu_list':organisations})
+
+# def teacher_form(request):
+#     organisations = Organisation_master.objects.values().all()
+#     print(organisations)
+#     if request.method == 'POST':
+#         org = request.POST.get('org')
+#         name = request.POST.get('teacher_name')
+#         if Teacher.objects.filter(teacher_name = name, Organisation = org).exists():
+#             pass
+#         else:
+#             z = Teacher(teacher_name = name, Organisation = org)
+#             z.save()
+
+#     return render(request,'teacher_form.html',{'menu_list':organisations})
+
+# def class_form(request):
+#     organisations = Organisation_master.objects.values().all()
+#     print(organisations)
+#     if request.method == 'POST':
+#         org = request.POST.get('org')
+#         name = request.POST.get('standard')
+#         if Class.objects.filter(class_n = name, Organisation = org).exists():
+#             pass
+#         else:
+#             z = Class(class_n = name, Organisation = org)
+#             z.save()
+
+#     return render(request,'class_form.html',{'menu_list':organisations})
+
+
+# def subjects_form(request):
+#     # organisations = Organisation_master.objects.values().all()
+#     # classes = Class.objects.values().all()
+#     # print(organisations)
+#     # if request.method == 'POST':
+#     #     org = request.POST.get('org')
+#     #     subject = request.POST.get('sub_n')
+#     #     stan = request.POST.get('std')
+#     #     if Subjects.objects.filter(subject_n = subject, Organisation = org, standard = stan).exists():
+#     #         pass
+#     #     else:
+#     #         z = Subjects(subject_n = subject, Organisation = org, standard = stan)
+#     #         z.save()
+#     return render(request,'subjects_form.html')
+
+# from .forms import SearchContactForm

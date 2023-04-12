@@ -16,6 +16,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -23,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-21rt+%qrv8ts%4xpr&nbqxaqn55yadnd65f^um$xx$jme$dwh@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,16 +80,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SEM_4.wsgi.application'
 
-
+# print(env('DATABASE_URL'))
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+import dj_database_url
+
+# # DATABASES = {
+# #     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# # }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(env('DATABASE_URL'))
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
