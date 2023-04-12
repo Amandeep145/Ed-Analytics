@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+
+
+{% block content %}
+<button type="button" onclick="history.back()" class="btn btn-success me-1 " style="float: left;">Back</button>
+
+
+
+<div class="container-fluid" style="background-color: rgb(255, 255, 255); padding-bottom: inherit;" style="height: 1000px;">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header" style="font-size: large;">Avg Internal Marks</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;">{{ int }}</h5>
+                <p class="card-text">Marks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header" style="font-size: large;">Avg External Marks</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;" >{{ ext }}</h5>
+                <p class="card-text">Marks</p>
+                </div>
+            </div>
+        </div>
+        
+    
+
+    <div>
+        {{ bar|safe }}
+    </div>
+    <div>
+        {{ bar1|safe }}
+    </div>
+    <!-- <div class="row">
+        <div >
+            <div class="" style="height: auto; width: auto">
+                {%load plotly_dash%}
+
+                {% plotly_app name='SimpleExample' ratio=2 %}
+                
+            </div>
+        </div>
+        </div> -->
+
+ {% endblock %}      

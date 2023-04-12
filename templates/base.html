@@ -1,0 +1,350 @@
+
+
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+
+<style>
+  .simplebar-content-wrapper{
+    background-color: #232366;
+  }
+</style>
+
+
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Education Data Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+
+    <!-- <link rel="shortcut icon" href="assets/images/favicon.ico"> -->
+    <!-- sweet alert-->
+   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'><link rel="stylesheet" href="/static/assets/css/style2.css"> -->
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href={% static "assets/css/bootstrap.min.css" %} id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href={% static "assets/css/icons.min.css" %} rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href={% static "assets/css/app.min.css" %} id="app-style" rel="stylesheet" type="text/css" />
+    <link href={% static "assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" %} rel="stylesheet" type="text/css" />
+    <link href={% static "assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" %} rel="stylesheet" type="text/css" />
+    <link href={% static "assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" %} rel="stylesheet" type="text/css" />
+    <link href={% static "assets/libs/admin-resources/rwd-table/rwd-table.min.css" %} rel="stylesheet" type="text/css" />
+    <link href={% static "assets/libs/font-awesome/css/font-awesome.min.css" %} rel="stylesheet" />
+    <link href={% static "assets/libs/fontello/css/fontello.css" %}" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body style="background-color: #e2e7f1;">
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header" style="background-color: rgb(253, 253, 253);">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="#" class="logo logo-dark">
+                            <span class="logo-sm">
+                               
+                            </span>
+                            <span class="logo-lg">
+                               
+                            </span>
+                        </a>
+                        <a href="#" class="logo logo-light">
+                            <span class="logo-sm">
+                               
+                            </span>
+                            <span class="logo-lg">
+                               
+                            </span>
+                        </a>
+                    </div>
+                    
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn"><i class="fa fa-fw fa-bars"></i>
+                    </button>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <h1 class="display-4 ml-5">Ed-Analytics</h1>
+                </div>
+                <h2 class="font-weight-bold"></h2>
+                <div class="d-flex">
+
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil-search"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
+                         
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="dropdown d-none d-lg-inline-block ms-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                            <i class="uil-minus-path"></i>
+                        </button>
+                    </div>
+
+                    {% if user.is_authenticated %}
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="{% static "assets/images/users/1.jpg" %}" alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">Hi {{user}}!</span>
+                            <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item " id="users_id" href="{% url 'accounts:logout' %}"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></a>
+                        </div>
+                    </div>
+
+                    {% else %}
+                    <p>You are not logged in</p>
+                    <a href="{% url 'accounts:login' %}">login</a>
+                        {% endif %}
+
+                </div>
+            </div>
+        </header>
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <!-- LOGO -->
+            <div class="navbar-brand-box"">
+                <a href="#" class="logo logo-dark">
+                    <span class="logo-sm">
+                       
+                    </span>
+                    <span class="logo-lg">
+                        
+                    </span>
+                </a>
+
+                <a href="#" class="logo logo-light">
+                    <span class="logo-sm">
+                       
+
+                    </span>
+                    <span class="logo-lg">
+                       
+                    </span>
+                </a>
+                
+            </div>
+
+            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+
+            <div data-simplebar class="sidebar-menu-scroll"
+                style="background: linear-gradient(to right, #3c3f46, #222325) ;">
+
+
+                
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <ul class = "metismenu list-unstyled" id="listlab">                  
+                    </ul>
+                    <input type="hidden" id="Url" data-url="{% url 'accounts:lab_menu' %}" />
+                    <div class="clearfix"></div>
+                 </div>
+
+
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+
+
+
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                
+                {% block content %}
+
+
+                {% endblock %}
+
+            </div>
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                        </div>
+
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+
+
+
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div data-simplebar class="h-100">
+
+                <div class="rightbar-title d-flex align-items-center px-3 py-4">
+
+                    <h5 class="m-0 me-2">Settings</h5>
+
+                    <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                        <i class="mdi mdi-close noti-icon"></i>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- JAVASCRIPT -->
+
+        <script src="{% static "assets/libs/jquery/jquery.min.js" %}"></script>
+
+        <script src="{% static "assets/libs/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+        <script src="{% static "assets/libs/metismenu/metisMenu.min.js" %}"></script>
+
+        <script src="{% static "assets/libs/simplebar/simplebar.min.js" %}"></script>
+
+        <script src="{% static "assets/libs/node-waves/waves.min.js" %}"></script>
+
+        <script src="{% static "assets/libs/waypoints/lib/jquery.waypoints.min.js" %}"></script>
+
+        <script src="{% static "assets/libs/jquery.counterup/jquery.counterup.min.js" %}"></script>
+
+
+
+
+        <!-- apexcharts -->
+        <!-- <script src="assets/libs/apexcharts/apexcharts.min.js"></script> -->
+
+
+
+        <!-- Chart JS -->
+
+        <script src="{% static "assets/libs/chart.js/Chart.bundle.min.js" %}"></script>
+        <script src="{% static "assets/js/pages/chartjs.init.js" %}"></script>
+
+
+        <!-- App js -->
+
+        <script src="{% static "assets/js/app.js" %}"></script>
+
+
+
+        <!-- <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script> -->
+        <script src="{% static "assets/libs/datatables.net/js/jquery.dataTables.min.js" %}"></script>
+        <script src="{% static "assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js" %}"></script>
+        <!-- Buttons examples -->
+        <script src="{% static "assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js" %}"></script>
+        <script src="{% static "assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js" %}"></script>
+        <script src="{% static "assets/libs/jszip/jszip.min.js" %}"></script>
+        <script src="{% static "assets/libs/pdfmake/build/pdfmake.min.js" %}"></script>
+        <script src="{% static "assets/libs/pdfmake/build/vfs_fonts.js" %}"></script>
+        <script src="{% static "assets/libs/datatables.net-buttons/js/buttons.html5.min.js" %}"></script>
+        <script src="{% static "assets/libs/datatables.net-buttons/js/buttons.print.min.js" %}"></script>
+        <script src="{% static "assets/libs/datatables.net-buttons/js/buttons.colVis.min.js" %}"></script>
+
+        <!-- Responsive examples -->
+        <script src="{% static "assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js" %}"></script>
+        <script src="{% static "assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" %}"></script>
+
+
+
+
+        <!-- Responsive Table js -->
+        <script src="{% static "assets/libs/admin-resources/rwd-table/rwd-table.min.js" %}"></script>
+
+        <!-- Init js -->
+        <script src="{% static "assets/js/pages/table-responsive.init.js" %}"></script>
+        <!-- Datatable init js -->
+        <script src="{% static "assets/js/pages/datatables.init.js" %}"></script>
+        <script src="{% static "assets/js/pages/dashboard.js" %}"></script>
+    
+        <script src="{% static "assets/js/labmenu.js" %}"></script>
+        <script src="{% static "assets/js/dropdown_dependence.js" %}"></script>
+
+        <style>
+            .rw-conversation-container .rw-replies {
+            display:block
+            }
+            .rw-conversation-container .rw-header{background-color:#9e00ce;}
+            .rw-conversation-container .rw-messages-container .rw-message .rw-client{background-color: #04d3ad;}
+            .rw-launcher{background-color: #9e00ce;}
+            .rw-conversation-container .rw-reply{background-color: #9e00ce; border: 1px solid #9e00ce;}
+            
+        </style>
+
+
+        <script>!(function () {
+            let e = document.createElement("script"),
+              t = document.head || document.getElementsByTagName("head")[0];
+            (e.src ="/static/assets/js/front_end.js"),
+             
+              // Replace 1.x.x with the version that you want
+              (e.async = !0),
+              (e.onload = () => {
+                window.WebChat.default(
+                  {
+                    customData: { language: "en" },
+                    // socketUrl: "http://115.124.114.30:5005/",
+                    socketUrl: "http://localhost:5005/",
+                    title: "VERA",
+                    initPayload: 'hi',
+                    inputTextFieldHint: "Type text here",
+                    showMessageDate: false,
+                    profileAvatar: "/static/assets/svg/robot.svg",
+                    openLauncherImage: "/static/assets/svg/chat-info.svg",
+                    closeImage: "/static/assets/svg/down-arrow.svg",
+                    showFullScreenButton: true,
+                    showMessageDate: true,
+                    
+                    // params: {storage: "session"}
+                    // add other props here
+                  },
+                  null
+                );
+              }),
+              t.insertBefore(e, t.firstChild);
+          })();
+          localStorage.clear();
+          </script>
+
+          
+
+        {% block javascript %}
+
+
+        {% endblock %}
+</body>
+
+</html>

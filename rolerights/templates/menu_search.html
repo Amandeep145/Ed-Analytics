@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+<div class="widget">
+   {% block content %}
+   <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
+
+      <div class="widget">
+      <div class="widget-header">
+         <h2>Menu Master </h2>
+         <!-- {{ a.menu_parent }} -->
+      </div>
+      <div class="widget-content padding">
+         <div class="text-right padding-bottom-10">
+      
+            <a href="{% url 'rolerights:menu_add' %}"> 
+            <button type="button" class="btn btn-success">
+            <i class="fa fa-plus-circle"></i> Add </button></a>
+         </div>
+         <form action="." class="form-horizontal">
+            <div class="widget-content padding">
+               
+      
+      
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Menu Name</label>
+                  <div class="col-sm-4">
+                     <select name='menuname'  id= 'form.menuname'  class="fld-subtype form-control" >
+                        <option value="">All</option>
+                        {% for a in menu_list %}
+                        <option value="{{ a.menuname }}">{{ a.menuname }}</option>
+                        {% endfor %}
+                     </select>
+                     </div>
+      
+      
+               </div>
+      
+            </div>
+      
+      
+      
+      
+      
+            <div class="text-center padding-bottom-20">
+               <button type="submit" class="btn btn-success">Search</button>
+               <button type="Reset" class="btn btn-info">Reset</button>
+      
+            <br>
+            <br>
+            
+            </div>
+         </form>
+         {% if ab %}
+         <h3>
+            Found {{ ab|length }} result 
+         </h3>
+         <p><a href="">Search again</a></p>
+      
+         <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="delbtn">
+               <tr>
+         
+                  <th>Menu Name</th>
+                  <th>Menu URL</th>
+                  <th>Menu Parent</th>
+                  <th>Status</th>
+                  
+                  <th>Edit</th>
+               </tr>
+      
+               
+               {% for a in ab %}
+               <tr>
+      
+                  <td>{{ a.menuname }}</td>
+                  <td>{{ a.menuurl }}</td>
+                  <td>{{ a.menu_parent }}</td>
+                  <td>{{ a.status }}</td>
+                  
+
+                  <td><a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-warning btn-sm" href="{% url 'rolerights:menu_edit' a.id %}" >
+                     <i class="fa fa-edit"></i>
+                     </a>
+                  </td>
+               
+               </tr>
+               {% empty %}
+               <h1>Not found</h1>
+               {% endfor %}
+            </table>
+         </div> 
+      
+      
+      
+      
+         {% endif %} 
+         {% endblock %}      
+      </div>
+      </div>
+   </div>
+   
+   </div>

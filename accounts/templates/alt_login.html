@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>ED-Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+ <link href="/static/assets/css/alt_style.css" rel="stylesheet">
+
+</head>
+{% if messages %}
+		{% for message in messages %}
+		{% if message.tags == 'error' %}
+		  <!-- sweetalert js -->
+		  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		  <script>
+			var m = "{{ message }}";
+			Swal.fire({
+				text: m,
+				imageHeight: 30,
+				icon: "error",
+				width:"25em",
+				color:"#fa1212",
+				confirmButtonColor: "#5b73e8",
+				timer:"2000",
+				showConfirmButton: false,
+				footer: '<a href="">It will close in 2 seconds...</a>',
+				
+			});
+			// Swal.stopTimer(500)
+		  </script>
+		{% endif %}
+	  {% endfor %}
+	  {% endif %}
+<body>
+<!-- partial:index.partial.html -->
+<div id="particles-js"></div>
+<body class="login">
+	<div class="container">
+		<div class="login-container-wrapper clearfix">
+			<h1 class="h1" style="margin-left: 50px">ED-Analytics</h1>
+			<div class="logo">
+				<i class="fa fa-user-o"></i>
+			</div>
+			<div class="welcome"><strong>Welcome,</strong> please login</div>
+
+			<form class="form-horizontal login-form" method="POST" id="formm">
+        {% csrf_token %}
+				<div class="form-group relative">
+					<input id="login_username" class="form-control input-lg" type="text" name = "username" placeholder="Username" required>
+					<i class="fa fa-user"></i>
+				</div>
+				<div class="form-group relative password">
+					<input id="login_password" class="form-control input-lg" type="password" name = "password" placeholder="Password" required>
+					<i class="fa fa-lock"></i>
+				</div>
+			  <div class="form-group">
+			    <button type="submit" class="btn btn-success btn-lg btn-block">Login</button>
+			  </div>
+        <!-- <div class="checkbox pull-left">
+			    <label><input type="checkbox"> Remember</label>
+			  </div>
+			  <div class="checkbox pull-right">
+			    <label> <a class="forget" href="" title="forget">Forgot your password</a> </label>
+			  </div> -->
+			</form>
+		</div>
+    
+    <h4 class="text-center">
+ 
+    </h4>
+	</div>
+
+  </body>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
+<!-- <script  src="./script.js"></script> -->
+<script src="{% static "assets/js/alt_script.js" %}"></script> 
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% block javascript %}
+<!-- <script src="{% static 'bookentry/js/bookentry.js' %}"></script> -->
+{% endblock %}
+<div class="widget">
+    {% block content %}
+    {% if messages %}
+   {% for message in messages %}
+   {% if message.tags == 'warning' %}
+   <!-- sweetalert js -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+      var m = "{{ message }}";
+      Swal.fire({
+         text: m,
+         imageHeight: 30,
+         width:"25em",
+         icon: "error",
+         showConfirmButton: false,
+         timer:"3000",
+      });
+      // Swal.stopTimer(500)
+   </script>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    <div class="container-fluid" style="background-color: rgb(255, 255, 255); padding-bottom: inherit;">
+    <div class="widget">
+    <div class="widget-header">
+       <h2> Role And User Map </h2>
+    </div>
+
+            <div class="mand-label clearfix"><span>Field with <i class="text-red-1">*</i> is mandatory</span></div>
+            {{error}}
+            <form method="post" class="form-horizontal"  action="" id="BookentryForm" enctype="multipart/form-data">
+               {% csrf_token %}
+
+
+
+
+               <div class="form-group">
+                  {{svg}}
+                  <label class="col-xs-2 control-label mt-4">Role Name <i class="text-red-1" >*</i></label>
+                  <div class="col-xs-4">
+                     <select name='role_master' id='form.role_master_id' class="fld-subtype form-control" >
+                        <option value="0">Select</option>
+                        {% for y in role_list %}
+                        <option value="{{ y.id }}">{{ y.rolename}}</option>
+                        {% endfor %}
+                     </select>
+               </div>
+
+               <div class="form-group">
+                  {{svg}}
+                  <label class="col-xs-2 control-label mt-4">User Name <i class="text-red-1" >*</i></label>
+                  <div class="col-xs-4">
+                     <select name='user_master' id='form.user_master_id' class="fld-subtype form-control" >
+                        <option value="0">Select</option>
+                        {% for y in User_list %}
+                        <option value="{{ y.id }}">{{ y.username}}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
+               </div>
+               
+             
+
+              
+               <br><br><br>
+
+            
+
+
+
+
+                <div class="text-center padding-top-10">
+                    <button type="submit"  class="btn btn-success" id="btn-submit">Submit</button>
+                    <a href="{% url 'rolerights:user_map_search' %}">  
+                    <button type="button" class="btn btn-danger">Cancel</button> </a>
+                </div>
+       </form>
+   </div>
+</div>
+</div>
+    </div>
+   {% endblock %}      
+</div>

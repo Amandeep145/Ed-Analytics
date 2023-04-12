@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+<div class="widget">
+   {% block content %}
+   <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
+
+      <div class="widget">
+      <div class="widget-header">
+         <h2>Teacher view</h2>
+         <!-- {{ a.menu_parent }} -->
+      </div>
+      <div class="widget-content padding">
+        
+         <form action="." class="form-horizontal">
+            <div class="widget-content padding">
+               
+      
+      
+               <div class="form-group">
+                  <label class="col-sm-2 control-label">Menu Name</label>
+                  <div class="col-sm-4">
+                     <select name='menuname'  id= 'form.menuname'  class="fld-subtype form-control" >
+                        <option value="">Select</option>
+                        {% for a in menu_list %}
+                        <option value="{{ a.Subject }}">{{ a.Subject }}</option>
+                        <!-- <option value="{{ a}}">{{ a }}</option> -->
+                        {% endfor %}
+                     </select>
+                     </div>
+      
+      
+               </div>
+      
+            </div>
+      
+      
+      
+      
+      
+            <div class="text-center padding-bottom-20">
+               <button type="submit" class="btn btn-success">Search</button>
+               <button type="Reset" class="btn btn-info">Reset</button>
+      
+            <br>
+            <br>
+            
+            </div>
+         </form>
+         {% if ab %}
+         <h3>
+            Found {{ ab|length }} result 
+         </h3>
+         <p><a href="">Search again</a></p>
+      
+         <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="delbtn">
+               <tr>
+         
+                  <th>Subject</th>
+                  <th>Semester</th>
+                  
+                  
+                  <th>Edit</th>
+               </tr>
+      
+               
+               {% for a in ab %}
+               <tr>
+      
+                  <td>{{ a.Subject }}</td>
+                  <td>{{ a.Semester }}</td>
+                  
+
+                  <td><a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-warning btn-sm"href="{% url 'dashboard:teacher_dynamic' pk=a.Subject jk=a.Semester %}" >
+                     <i class="fa fa-edit"></i>
+                     </a>
+                  </td>
+               
+               </tr>
+               {% empty %}
+               <h1>Not found</h1>
+               {% endfor %}
+            </table>
+         </div> 
+      
+      
+      
+      
+         {% endif %} 
+         {% endblock %}      
+      </div>
+      </div>
+   </div>
+   
+   </div>

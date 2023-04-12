@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+{% block javascript %} 
+
+   
+   <script src="{% static "assets/js/dropdown_dependence.js" %}"></script>
+
+
+   {% endblock %}      
+<div class="widget">
+    {% block content %}
+    
+   <!-- Bootstrap CSS -->
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
+   <!-- Select2 CSS -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    {% if messages %}
+   {% for message in messages %}
+   {% if message.tags == 'warning' %}
+   <!-- sweetalert js -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+      var m = "{{ message }}";
+      Swal.fire({
+         text: m,
+         imageHeight: 30,
+         width:"25em",
+         icon: "error",
+         showConfirmButton: false,
+         timer:"3000",
+      });
+      // Swal.stopTimer(500)
+   </script>
+  
+
+
+
+
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    <div class="container-fluid" style="background-color: rgb(255, 255, 255); padding-bottom: inherit; height: 900px;">
+      <div class="widget">
+      <div class="widget-header">
+         <h2> Role And Menu Map </h2>
+      </div>
+
+      
+               <div class="mand-label clearfix"><span>Field with <i class="text-red-1">*</i> is mandatory</span></div>
+               {{error}}
+               <form method="post" class="form-horizontal"  action="" id="BookentryForm" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+
+
+
+                  <div class="form-group">
+                     {{svg}}
+                     <label class="col-xs-2 control-label ml-3 mt-3">Role Name <i class="text-red-1" ></i></label>
+                     <div class="col-sm-4">
+                        <select name='role_master' id='form.role_master_id' class="fld-subtype form-control">
+                           <option value="">Select</option>
+                           {% for y in role_list %}
+                           <option value="{{ y.id }}">{{ y.rolename}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+                     <label class="col-xs-2 control-label ml-3 mt-3" >Main Menu<i class="text-red-1" >*</i></label>
+                     <div class="col-sm-4">
+                        <select name='menu_master_m' id='menu_master_id' class="form-control mainmenu"  onchange=module_list()>
+                           <option value="">Select</option>
+                           {% for y in main_menu %}
+                           <option value="{{ y.id }}">{{ y.menuname}}</option>
+                           {% endfor %}
+                        </select>
+                     </div>
+
+                     <label class="col-xs-2 control-label ml-3 mt-3" >Sub Menu<i class="text-red-1" >*</i></label>
+                     <div class="col-md-4">
+                        <select name='menu_master' id='submenu' class="form-control" multiple >
+                    
+                        </select>
+                     </div>
+
+                  </div>
+                  <!-- jQuery -->
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                  <!-- Select2 -->
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+                  <script>
+                     $("#submenu").select2({
+                        allowClear: true,
+                        closeOnSelect: false
+                     });
+                     // $("#menu_master_id").select2({
+                     //    allowClear: true,
+                     //    closeOnSelect: true
+                     // });
+                  </script>
+               
+
+               
+                  <br><br><br>
+
+               
+                    
+
+                  <div class="text-center padding-top-10">
+                     <button type="submit"  class="btn btn-success" id="btn-submit">Submit</button>
+                     <a href="{% url 'rolerights:role_menu_map_search' %}">  
+                     <button type="button" class="btn btn-danger">Cancel</button> </a>
+                  </div>
+               </form>
+      </div>
+     
+   
+   <div>
+   </div>
+   {% endblock %}
+   
+   </div>
+</div>

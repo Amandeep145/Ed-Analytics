@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="shortcut icon" href="" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<!-- Base Css Files for Global -->
+<link href="{% static "assets/libs/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+<!-- <link href="{% static "assets/libs/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet"> -->
+<link href="{% static "assets/libs/fontello/css/fontello.css" %}" rel="stylesheet">
+
+<link href="{% static "assets/libs/animate-css/animate.min.css" %}" rel="stylesheet">
+<link href="{% static "assets/libs/pace/pace.css" %}" rel="stylesheet">
+<link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+<link href="{% static "assets/css/style-responsive.css" %}" rel="stylesheet">
+<link href="{% static "assets/libs/lightbox/jquery.fancybox.css" %}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	#loginbackgroupd {
+
+	  padding: 25px;
+	  background: url('{% static "assets/images/new_bg.jpg"%}');
+	  background-repeat: no-repeat;
+	  background-size: 100%;
+	  background-position: center;
+	}
+	
+	
+
+
+</style>
+</head>
+
+
+
+    <body  id="loginbackgroupd"  > 
+	
+	<!-- Begin page -->
+	<div class="container" > 
+		{% if messages %}
+		{% for message in messages %}
+		{% if message.tags == 'error' %}
+		  <!-- sweetalert js -->
+		  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		  <script>
+			var m = "{{ message }}";
+			Swal.fire({
+				text: m,
+				imageHeight: 30,
+				icon: "error",
+				width:"25em",
+				color:"#fa1212",
+				confirmButtonColor: "#5b73e8",
+				timer:"2000",
+				showConfirmButton: false,
+				footer: '<a href="">It will close in 2 seconds...</a>',
+				
+			});
+			// Swal.stopTimer(500)
+		  </script>
+		{% endif %}
+	  {% endfor %}
+	  {% endif %}
+		<div class="full-content-center"  >
+			<div class="login-wrap animated flipInX rounded "  style=" background: #fff ;
+			color: #fff; box-shadow: 0 0 15px rgb(224, 244, 247);" >
+				<div  align='center' class="login-block" style="color:rgb(0, 0, 0); ">
+					<!-- <img  src="{% static "assets/images/maharashtra-logo.png" %}"  height="100" width="100"> -->
+		
+					<p class="text-center" style="font-size:15px;">Educational Data Analysis</p>
+	
+              
+                    <br/>
+				
+			
+					<form method="POST" action="" id="formm">
+						<!-- <div class="alert-heading" style="color: #f31d1d ;">
+							{{ error }} 
+					</div> -->
+							{% csrf_token %}
+
+						<div class="form-group login-input">
+						<i class="fa fa-user-circle-o overlay"></i>
+						<input type="text" class="form-control text-input rounded  " name="username" placeholder="Username">
+						</div>
+						<br>
+						<div class="form-group login-input">
+						<i class="fa fa-key overlay"></i>
+						<input type="password" class="form-control text-input rounded" name="password" placeholder="Password">
+						</div>
+						
+						<div class="row">
+						<div class="col-sm-12">
+							<button type="submit" class="btn btn-success btn-block mt-4" id="log" style="background: linear-gradient(to right, #0d32b7, #417fe2) ;color: #fff; box-shadow: 0 0 15px rgb(56, 206, 233);">Login</button>
+    					</div>
+					</div>
+							<p class="text-center" style="font-size:10px;">Version 0.01</p>
+
+			 
+					</form>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+<!-- End of page --> 
+<!-- the overlay modal element -->
+<div class="md-overlay"></div>
+<!-- End of eoverlay modal --> 
+<script>
+    var resizefunc = [];
+	
+</script> 
+
+
+
+<!-- <script src="{% static "assets/libs/jquery/jquery-1.11.1.min.js" %}"></script>  -->
+<script src="{% static "assets/libs/bootstrap/js/bootstrap.min.js" %}"></script> 
+<script src="{% static "assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js" %}"></script> 
+<script src="{% static "assets/libs/pace/pace.min.js" %}"></script> 
+<script src="{% static "assets/libs/bootstrap-bootbox/bootbox.min.js" %}"></script> 
+<script src="{% static "assets/libs/jquery-detectmobile/detect.js" %}"></script> 
+<!-- <script src="{% static "assets/js/init.js" %}"></script>  -->
+<script src="{% static "assets/libs/lightbox/jquery.fancybox.js" %}"></script> 
+<script src="{% static "assets/libs/jquery-slimscroll/jquery.slimscroll.js" %}"></script> 
+
+</body>
+</html>

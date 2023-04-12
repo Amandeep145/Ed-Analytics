@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block javascript %}
+<script src="{% static "assets/js/dropdown_dependence.js" %}"></script>
+{% endblock %}
+<div class="widget">
+    {% block content %}
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+   <!-- Select2 CSS -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    <div class="container-fluid" style="background-color: rgb(255, 255, 255); padding-bottom: inherit; height: 1000px;">
+      <div class="widget">
+      <div class="widget-header">
+         <h2> Role And Menu Map </h2>
+      </div>
+
+               <div class="mand-label clearfix"><span>Field with <i class="text-red-1">*</i> is mandatory</span></div>
+               {{error}}
+               <form method="post" class="form-horizontal"  action="" id="BookentryForm" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+                  <div class="form-group">
+                     {{svg}}
+                     <label class="col-xs-2 control-label ml-3 mt-3">Role Name <i class="text-red-1" ></i></label>
+                     <div class="col-sm-4">
+                        <select name='role_master' id='form.role_master_id' class="fld-subtype form-control select">
+                           <option value="{{ r2.0.role_master_id }}" selected>{{ r2.0.role_master_id__rolename }}</option>
+                        </select>
+                     </div>
+                     <!-- <label class="col-xs-2 control-label  ml-3 mt-4">Menu Name<i class="text-red-1" >*</i></label>
+                     <div class="col-sm-4">
+                        <select name='menu_master' id='form.menu_master_id' class="fld-subtype form-control selectpicker" multiple data-live-search="true" data-size="15" >
+                           {% for y in menu_list %}
+                           <option value="{{ y.menu_master_id }}"  {% if y.role_master_id == r2.0.role_master_id   %}selected{% endif %}>{{ y.menu_master_id__menuname }}</option>
+                           {% endfor %} 
+                        </select>
+                     </div> -->
+                     <!-- <label class="col-xs-2 control-label ml-3 mt-3" >Main Menu<i class="text-red-1" >*</i></label>
+                     <div class="col-sm-4">
+                        <select name='menu_master_m' id='menu_master_id' class="form-control mainmenu" data-live-search="true" data-size="15" onchange=sub_list()>
+                           <option value="">Select</option>
+                           {% for y in main_menu %}
+                           <option value="{{ y.id }}">{{ y.menuname}}</option>
+                           {% endfor %}
+                        </select>
+                     </div> -->
+
+
+                     <label class="col-xs-2 control-label ml-3 mt-3" >Menu<i class="text-red-1" >*</i></label>
+                     <div class="col-md-4">
+                        <select name='menu_m' id='submenu' class="form-control" multiple >
+                           <option value="" disabled>Select</option>
+                           {% for i in mk %}
+                           {% if i.id in hj %}
+                           <option value="{{ i.id }}"  selected>{{ i.menuname }}</option>
+                           {% else %}
+                           <option value="{{ i.id }}"  >{{ i.menuname }}</option>
+                           {% endif %} 
+                           {% endfor %} 
+                        </select>
+                     </div>
+
+
+
+
+                     <!-- <label class="col-xs-2 control-label  ml-3 mt-4">Menu Name<i class="text-red-1" >*</i></label>
+                     <div class="col-md-4">
+                        <select name='menu_m' id='menu_m_id' class="form-control selectpicker" multiple data-live-search="true"  >
+                           {% for i in mk %}
+                           {% if i.id in hj %}
+                           <option value="{{ i.id }}"  selected>{{ i.menuname }}</option>
+                           {% else %}
+                           <option value="{{ i.id }}"  >{{ i.menuname }}</option>
+                           {% endif %} 
+                           {% endfor %} 
+                        </select>
+                     </div> -->
+                  </div>
+               
+               
+                  <br><br><br>
+
+               
+
+
+
+
+                  <div class="text-center padding-top-10">
+                     <button type="submit"  class="btn btn-success" id="btn-submit">Submit</button>
+                     <a href="{% url 'rolerights:role_menu_map_search' %}"> <button type="button" class="btn btn-danger">Cancel</button> </a>
+                     <button type="reset" class="btn btn-info">Reset</button>
+                  </div>
+         </form>
+      </div>
+      <!-- jQuery -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- Select2 -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+      <script>
+         $("#submenu").select2({
+            allowClear: true,
+            closeOnSelect: false
+         });
+      </script>
+   
+
+   
+   </div>
+   </div>
+      {% endblock %}      
+   </div>
+</div>

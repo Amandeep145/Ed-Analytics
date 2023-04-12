@@ -1,0 +1,68 @@
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<button type="button" onclick="history.back()" class="btn btn-success me-1 " style="float: left;">Back</button>
+
+
+
+<div class="container-fluid" style="background-color: rgb(255, 255, 255); padding-bottom: inherit;" style="height: 1000px;">
+    <div>
+        <h1 align="center">Subject: {{ sub }} </h1>
+        <h1 align="center">Name: {{ nam }} </h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col-lg-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header" style="font-size: large;">Internal Marks</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;">{{ int }}</h5>
+                <p class="card-text">Marks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header" style="font-size: large;color: rgb(0, 0, 0);">External Marks</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: rgb(0, 0, 0);font-size: 25px;" >{{ ext }}</h5>
+                <p class="card-text" style="color: rgb(0, 0, 0);">Marks</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header" style="font-size: large;">Overall Average Internal</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;">{{ reA }}</h5>
+                <p class="card-text">Marks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header" style="font-size: large;">Overall Average External</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;" >{{ reB }}</h5>
+                <p class="card-text">Marks</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    
+
+    <div>
+        <!-- {{ bar|safe }} -->
+    </div>
+    <div>
+        <!-- {{ bar1|safe }} -->
+    </div>
+    
+</div>
+ {% endblock %}      

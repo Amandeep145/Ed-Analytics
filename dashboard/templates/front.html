@@ -1,0 +1,76 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<div class="container-fluid" style="background-color: rgb(255, 255, 255); padding-bottom: inherit;">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card text-white mb-3" style="background-color: #3140d1;">
+                <div class="card-header" style="font-size: large;">Students</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;">{{ Student }}</h5>
+                <p class="card-text">students</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card text-white mb-3" style="background-color: rgb(200 45 35);">
+                <div class="card-header" style="font-size: large;">Subjects</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;" >{{ Subjects }}</h5>
+                <p class="card-text">No. of Subjects</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card text-white  mb-3" style="background-color: #e2af38;">
+                <div class="card-header" style="font-size: large;">Overall Average Internal</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;">{{ reA }}</h5>
+                <p class="card-text">Marks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card text-white  mb-3" style="background-color: darkslategrey;">
+                <div class="card-header" style="font-size: large;">Overall Average External</div>
+                <div class="card-body">
+                <h5 class="card-title" style="color: aliceblue;font-size: 25px;" >{{ reB }}</h5>
+                <p class="card-text">Marks</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+    <div class="row">
+        <div >
+            <div class="" style="height: auto; width: auto">
+                {%load plotly_dash%}
+
+                {% plotly_app name='SimpleExample' ratio=2 %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+    <!-- <div class="row">
+        <div >
+            <div class="" style="height: auto; width: auto">
+                {%load plotly_dash%}
+
+                {% plotly_app name='SimpleExample' ratio=2 %}
+                
+            </div>
+        </div>
+        </div> -->
+
+
+{% endblock %}
