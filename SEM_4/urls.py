@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -24,3 +25,5 @@ urlpatterns = [
     path('rolerights/',include('rolerights.urls')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
+
+# urlpatterns += staticfiles_urlpatterns()

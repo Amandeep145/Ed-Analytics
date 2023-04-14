@@ -315,12 +315,15 @@
               (e.onload = () => {
                 window.WebChat.default(
                   {
-                    customData: { language: "en" },
                     socketUrl: "http://115.124.116.113:5005/",
                     // socketUrl: "http://localhost:5005/",
                     title: "VERA",
                     initPayload: 'hi',
                     inputTextFieldHint: "Type text here",
+                    customData: { 
+                    language: "en",
+                    websiteUrl: "http://example.com"
+                    },
                     showMessageDate: false,
                     profileAvatar: "/static/assets/svg/robot.svg",
                     openLauncherImage: "/static/assets/svg/chat-info.svg",
