@@ -13,117 +13,9 @@ from django.contrib.auth.decorators import login_required
 
 
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
-def menu(request,success=None):
-    menu_list =menu_master1.objects.all().values()
-    form = SearchContactForm()
-    if request.method == 'GET':
-        menuname =request.GET.get('menuname')
 
-        if request.GET.get('menuname') == '' :
-           
-            a = menu_master1.objects.all()
-            
-        else:
-             a = menu_master1.objects.filter(menuname=menuname)
-            #  print(a)
-    return render(request,'menu_search.html',{'form': form,'ab':a, 'menu_list':menu_list})        
-
-
-
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
-def menu_add(request, template_name='menu_add.html'):
-    status_list = {"Active": "Active", "Inactive": "Inactive"}
-    ic = {'Home':'fa fa-home','Teacher':'fa fa-users' ,'Link':'fa fa-link', 'Mail':'fa fa-envelope-o', 'Circle':'fa fa-circle', 'Clock':'fa fa-clock-o', 'User':'fa fa-user', 'Task':'fa fa-tasks', 'Money':'fa fa-money', 'Upload':'fa fa-upload', 'Database':'fa fa-database'}
-    # print(ic)
-    menu_list =menu_master1.objects.all().values()
-    if request.method == 'POST':
-        st = request.POST.get('status')
-        ico = request.POST.get('icon_name')
-        # print(st)
-        # print(ico)
-        form = menuForm(request.POST, request.FILES) 
-        
-        if form.is_valid():
-            
-            menu1= form.cleaned_data['menuname']
-            menu2= form.cleaned_data['menuurl']
-            menu3= form.cleaned_data['menudesc']
-            menu4= form.cleaned_data['status']
-            menu5= form.cleaned_data['menu_parent']
-            menu6= form.cleaned_data['iconn']
-            # print(form.errors)
-            if menu_master1.objects.filter(menuname=menu1,menuurl=menu2,menudesc=menu3,status=menu4,menu_parent=menu5, iconn=menu6).exists():
-                messages.warning(request,'Menu already exists')
-                form = menuForm()
-                return render(request, template_name,{'form':form,'status_list':status_list})
-            else:
-                # messages.warning(request, 'Saved successfully')
-                form.save()
-                return redirect('rolerights:menu_search')
-    else:
-        form =menuForm()
-        return render(request, template_name, {'form': form,'status_list':status_list,'menu_list':menu_list, 'ic':ic})  
-
-
-
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
-def menu_edit(request, pk, template_name='menu_edit.html'):
-    menu_list =menu_master1.objects.all().values()
-    status_list = {"Active": "Active", "Inactive": "Inactive"}
-    post = get_object_or_404(menu_master1, pk=pk)
-    form = menuForm(request.POST or None, instance=post)
-    ic = {'Home':'fa fa-home', 'Link':'fa fa-link', 'Mail':'fa fa-envelope-o', 'Circle':'fa fa-circle', 'Clock':'fa fa-clock-o', 'User':'fa fa-user', 'Task':'fa fa-tasks', 'Money':'fa fa-money', 'Upload':'fa fa-upload', 'Database':'fa fa-database'}
-    # print(ic)
-    if form.is_valid():
-            print('valid')
-            me1= form.cleaned_data['menuname']
-            me2= form.cleaned_data['menuurl']
-            me3= form.cleaned_data['menudesc']
-            me4= form.cleaned_data['status']
-            me5= form.cleaned_data['menu_parent']
-            me6= form.cleaned_data['iconn']
-            if menu_master1.objects.filter(menuname=me1,menuurl=me2,menudesc=me3,status=me4,menu_parent=me5, iconn=me6).exists():
-                messages.warning(request,'Menu already exists')
-                form = menuForm()
-                return redirect('rolerights:menu_search')
-            else:
-                # messages.warning(request, 'Saved successfully')
-                form.save()
-                return redirect('rolerights:menu_search')
-    else:
-        form =menuForm(request.POST or None, instance=post)
-        return render(request, template_name, {'form': form,'status_list':status_list,'menu_list':menu_list, 'ic':ic})  
-    
-
-
-
-
-
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
-def role_search(request,success=None):
-    bgg = role_master.objects.all()
-    form = SearchContactForm()
-    if request.method == 'GET':
-        rolename =request.GET.get('rolename')
-        if request.GET.get('rolename') == '' :
-           
-            b = role_master.objects.all()
-            
-        else:
-            b = role_master.objects.filter(rolename = rolename)
-            
-    return render(request,'role_search.html',{'form': form,'ba':b, 'bgg':bgg})        
-
-
-
-
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def role_add(request, template_name='role_add.html'):
     status_list = {"Active": "Active", "Inactive": "Inactive"}
     if request.method == 'POST':
@@ -148,9 +40,117 @@ def role_add(request, template_name='role_add.html'):
         return render(request, template_name, {'form': form,'status_list':status_list})  
 
 
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
+def menu(request,success=None):
+    menu_list =menu_master1.objects.all().values()
+    form = SearchContactForm()
+    if request.method == 'GET':
+        menuname =request.GET.get('menuname')
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+        if request.GET.get('menuname') == '' :
+           
+            a = menu_master1.objects.all()
+            
+        else:
+             a = menu_master1.objects.filter(menuname=menuname)
+             print(a)
+    return render(request,'menu_search.html',{'form': form,'ab':a, 'menu_list':menu_list})        
+
+
+
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
+def menu_add(request, template_name='menu_add.html'):
+    status_list = {"Active": "Active", "Inactive": "Inactive"}
+    ic = {'Home':'fa fa-home', 'Link':'fa fa-link', 'Mail':'fa fa-envelope-o', 'Circle':'fa fa-circle', 'Clock':'fa fa-clock-o', 'User':'fa fa-user', 'Task':'fa fa-tasks', 'Money':'fa fa-money', 'Upload':'fa fa-upload', 'Database':'fa fa-database'}
+    print(ic)
+    menu_list =menu_master1.objects.all().values()
+    if request.method == 'POST':
+        st = request.POST.get('status')
+        ico = request.POST.get('icon_name')
+        print(st)
+        print(ico)
+        form = menuForm(request.POST, request.FILES) 
+        
+        if form.is_valid():
+            
+            menu1= form.cleaned_data['menuname']
+            menu2= form.cleaned_data['menuurl']
+            menu3= form.cleaned_data['menudesc']
+            menu4= form.cleaned_data['status']
+            menu5= form.cleaned_data['menu_parent']
+            menu6= form.cleaned_data['iconn']
+            print(form.errors)
+            if menu_master1.objects.filter(menuname=menu1,menuurl=menu2,menudesc=menu3,status=menu4,menu_parent=menu5, iconn=menu6).exists():
+                messages.warning(request,'Menu already exists')
+                form = menuForm()
+                return render(request, template_name,{'form':form,'status_list':status_list})
+            else:
+                # messages.warning(request, 'Saved successfully')
+                form.save()
+                return redirect('rolerights:menu_search')
+    else:
+        form =menuForm()
+        return render(request, template_name, {'form': form,'status_list':status_list,'menu_list':menu_list, 'ic':ic})  
+
+
+
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
+def menu_edit(request, pk, template_name='menu_edit.html'):
+    menu_list =menu_master1.objects.all().values()
+    status_list = {"Active": "Active", "Inactive": "Inactive"}
+    post = get_object_or_404(menu_master1, pk=pk)
+    form = menuForm(request.POST or None, instance=post)
+    ic = {'Home':'fa fa-home', 'Link':'fa fa-link', 'Mail':'fa fa-envelope-o', 'Circle':'fa fa-circle', 'Clock':'fa fa-clock-o', 'User':'fa fa-user', 'Task':'fa fa-tasks', 'Money':'fa fa-money', 'Upload':'fa fa-upload', 'Database':'fa fa-database'}
+    print(ic)
+    if form.is_valid():
+            
+            me1= form.cleaned_data['menuname']
+            me2= form.cleaned_data['menuurl']
+            me3= form.cleaned_data['menudesc']
+            me4= form.cleaned_data['status']
+            me5= form.cleaned_data['menu_parent']
+            me6= form.cleaned_data['iconn']
+            if menu_master1.objects.filter(menuname=me1,menuurl=me2,menudesc=me3,status=me4,menu_parent=me5, iconn=me6).exists():
+                messages.warning(request,'Menu already exists')
+                form = menuForm()
+                return redirect('rolerights:menu_search')
+            else:
+                # messages.warning(request, 'Saved successfully')
+                form.save()
+                return redirect('rolerights:menu_search')
+    else:
+        form =menuForm(request.POST or None, instance=post)
+        return render(request, template_name, {'form': form,'status_list':status_list,'menu_list':menu_list, 'ic':ic})  
+    
+
+
+
+
+
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
+def role_search(request,success=None):
+    bgg = role_master.objects.all()
+    form = SearchContactForm()
+    if request.method == 'GET':
+        rolename =request.GET.get('rolename')
+        if request.GET.get('rolename') == '' :
+           
+            b = role_master.objects.all()
+            
+        else:
+            b = role_master.objects.filter(rolename = rolename)
+            
+    return render(request,'role_search.html',{'form': form,'ba':b, 'bgg':bgg})        
+
+
+
+
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def role_edit(request, pk, template_name='role_edit.html'):
     status_list = {"Active": "Active", "Inactive": "Inactive"}
     post = get_object_or_404(role_master, pk=pk)
@@ -177,32 +177,21 @@ def role_edit(request, pk, template_name='role_edit.html'):
 
 
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def role_menu_map_add(request,template_name='role_map_add.html'):
-    global sub_menu
     role_list =role_master.objects.all().filter(status = 'Active').values()
     menu_list =menu_master1.objects.all().filter(status = 'Active').values()
-    main_menu = menu_master1.objects.all().filter(status = 'Active', menuurl = '#').values()
-    if 'mainmenu' in request.GET:
-        print(request.GET.getlist('menu_master_m'))
-        sub_menu = menu_master1.objects.filter(id = request.GET.get('mainmenu'), status = 'Active').values('id')
-        # print(sub_menu)
-        a = menu_master1.objects.filter(menu_parent_id__in= sub_menu).values_list('menuname','id')
-        return JsonResponse(list(a),safe=False)
-    # print(main_menu)
+    map_list = role_menu_map.objects.all().values()
     if request.method == 'POST':
         form = role_menu_mapForm(request.POST, request.FILES) 
-        su = sub_menu[0]['id']
-        # print(su)
         f1= request.POST.get('role_master')
         f2=  request.POST.getlist('menu_master')  
-        f2.append(su)
-        print(f2)
+        print(f1)
         for i in f2:    
             if role_menu_map.objects.filter(role_master_id=f1, menu_master_id=i).exists():
                 print('heloo')
-                messages.warning(request,'Mapping already exists')
+                # messages.warning(request,'Mapping already exists')
                 form = role_menu_mapForm()
             else:
                 ff = role_menu_map(role_master_id=f1, menu_master_id=i)
@@ -210,87 +199,71 @@ def role_menu_map_add(request,template_name='role_map_add.html'):
         return redirect('rolerights:role_menu_map_search')
     else:
         form =role_menu_mapForm()
-        return render(request, template_name, {'form': form,'role_list':role_list,'menu_list':menu_list, 'main_menu':main_menu})  
+        return render(request, template_name, {'form': form,'role_list':role_list,'menu_list':menu_list})  
 
 
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def role_menu_map_search(request,template_name='role_menu_map_search.html'):
     role_list =role_master.objects.all().values()
     form =role_menu_mapForm()
     results =[]
     if 'rolename' in request.GET:
         rolename =request.GET.get('rolename')
-        print(rolename)
         if rolename == '':
             act = role_master.objects.all().filter(status = 'Active').values('id')
-            # print(act)
-            print('hi')
+            print(act)
             results = role_menu_map.objects.all().filter(role_master_id__in = act).values('role_master_id__rolename','role_master_id').distinct()
-            # print(results)
+            print(results)
             r1 = role_menu_map.objects.all().values()
         else:
-            act = role_master.objects.all().filter(status = 'Active').values('id')
-            results = role_menu_map.objects.all().filter(role_master_id__in = act, role_master_id = rolename).values('role_master_id__rolename','role_master_id').distinct()
-            print('hellp')
-            print(results)
-            # results = role_menu_map.objects.all().values().distinct()
-            # results = role_menu_map.objects.all().filter(role_master_id__in = act, role_master_id__rolename = rolename).values('role_master_id__rolename','role_master_id').distinct()
+            results = role_menu_map.objects.values().distinct()
             # results = role_menu_map.objects.filter(role_master=rolename)
     return render(request, template_name, {'form': form,'role_list':role_list,'results':results})  
 
 
 
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def role_menu_map_edit(request, role_master_id):
     roleid = role_master_id
     roles = role_master.objects.all().filter(id = roleid).values()
     r2 = role_menu_map.objects.filter(role_master_id = role_master_id).values('menu_master_id','role_master_id__rolename','role_master_id')
-    main_menu = menu_master1.objects.all().filter(status = 'Active', menuurl = '#').values()
+    all_r = role_menu_map.objects.all().values('menu_master_id')
     menu_list = role_menu_map.objects.values('id','menu_master_id__menuname','role_master_id', 'menu_master_id')
-    # if 'mainmenu' in request.GET:
-    #     sub_menu = menu_master1.objects.filter(id = request.GET.get('mainmenu'), status = 'Active').values('id')
-    #     # print(sub_menu)
-    #     hjj =list( role_menu_map.objects.filter(role_master_id = role_master_id).values_list('menu_master_id__menuname'))
-    #     a = list(menu_master1.objects.filter(menu_parent_id__in= sub_menu,).values_list('menuname','id'))
-    #     print(hjj)
-    #     print(a)
-    #     return JsonResponse({'a':a,'hjj':hjj},safe=False)
     hj =list( role_menu_map.objects.filter(role_master_id = role_master_id).values_list('menu_master_id'))
-    b =[]
+    a =[]
     for  i in range(len(hj)):
         for j in hj[i]:
-            b.append(j)
+            a.append(j)
     mk = menu_master1.objects.all().filter(status = 'Active').values()
-    print(mk)
     if request.method == "POST":
         ro = request.POST.get('role_master')
         menus = request.POST.getlist('menu_m')
-        # print(ro)
-        # print(menus)
+        print(ro)
+        print(menus)
         al = role_menu_map.objects.filter(role_master_id = ro).values_list('menu_master_id')
         # for i in menus:
         if role_menu_map.objects.filter(role_master_id = ro).exists():
             role_menu_map.objects.all().filter(role_master_id = ro).delete()
-            # print('deleted')
+            print('deleted')
             for i in menus:
                 zz = role_menu_map(role_master_id = ro, menu_master_id = i )
                 zz.save()
-                # print(role_menu_map.objects.filter(role_master_id = ro).values())
+                print(role_menu_map.objects.filter(role_master_id = ro).values())
             return redirect('rolerights:role_menu_map_search')
-    return render(request, 'role_menu_map_edit.html', {'menu_list':menu_list, 'roles':roles , 'roleid':roleid ,'r2': r2, 'mk':mk, 'hj':b, 'main_menu':main_menu})
+    return render(request, 'role_menu_map_edit.html', {'menu_list':menu_list, 'roles':roles , 'roleid':roleid ,'r2': r2, 'mk':mk, 'hj':a})
 
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def user_map_add(request,template_name='user_map_add.html'):
     role_list =role_master.objects.all().filter(status = 'Active').values()
     User_list =User.objects.all().values()
     r = user_map.objects.all().values()
-    # print(r)
+    print(r)
     if request.method == 'POST':
         form = user_mapForm(request.POST, request.FILES)
         # print(form.errors) 
@@ -313,8 +286,8 @@ def user_map_add(request,template_name='user_map_add.html'):
 
 
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def user_map_search(request,template_name='user_map_search.html'):
     # lab_list =lab_master.objects.all().values()
     use_list =user_map.objects.all().values()
@@ -334,8 +307,8 @@ def user_map_search(request,template_name='user_map_search.html'):
     return render(request, template_name, {'form': form, 'role_list':role_list, 'results':results})  
 
 
-# @login_required
-# @allowed_users(allowed_roles=['Admin'])
+@login_required
+#@allowed_users(allowed_roles=['Admin'])
 def user_map_edit(request, pk, template_name='user_map_edit.html'):
     role_list =role_master.objects.all().filter(status = 'Active').values()
     User_list =User.objects.all().values()

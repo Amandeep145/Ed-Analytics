@@ -21,9 +21,9 @@ from django.contrib import messages
 def upload_marks(request):
     if request.method == "POST":
         myfile = request.FILES.get('doc')
-        df = pd.read_csv(myfile)
-        df.rename(columns = {'Roll No':'No','Student Name':'Name'}, inplace = True)
         try:
+            df = pd.read_csv(myfile)
+            df.rename(columns = {'Roll No':'No','Student Name':'Name'}, inplace = True)
             cols = ['IA', 'SEE']
             df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
             df.fillna(0,inplace = True)
