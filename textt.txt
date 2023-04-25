@@ -1,0 +1,216 @@
+Abstract
+
+Ed-Analytics is a data science project developed using Django framework to help teachers and students analyze academic performance. The project collects data from R.J.College of students of BAMMC course from the years 2019-2022, which contains 3 years of data. The data is processed and stored in an excel file that contains 5 columns, including name, subject, internal marks, external marks, and semester. The project has three types of users: students, teachers, and admins. Students can view their performance in the latest semester, including average internal and external marks, bar graphs of their marks in each subject and semester. Teachers can see the average marks of students in the subject they teach, top 5 most and least scoring students, and bar graphs of all students' marks in their subject. Admins can view the performance of both students and teachers, total number of students, subjects, average internal and external marks, and an interactive pie chart of subjects in the latest semester. Additionally, admins can manage roles and access rights for different users.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Acknowledgement
+ 
+Before we get into thick of things, I would like to add a few heartfelt words for the people who were part of Ed-Analytics project in numerous ways, people who gave unending support right from the stage the project idea was conceived.  
+A project report is such a comprehensive coverage; it would not have been materialized without the help of many. The four things that go on to make a successful endeavour are dedication, hard work, patience and correct guidance. Able and timely guidance not only helps in making an effort fruitful but also transforms the whole process of learning and implementing into an enjoyable experience.  
+In particular, I would like to thank our Mentor/Director Dr. (Mrs.) Usha Mukundan, R.J. College. I would like to give a very special honor and respect to our teacher, Prof. Mujtaba Shaikh and our project guide Yousoufi Waisullah who took keen interest in checking the minute details of the project work and guided us throughout the same. A sincere quote of thanks to the non-teaching staff for providing us software their time. I appreciate outstanding co-operation by them, especially for the long Lab timings that we could receive. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Declaration
+ 
+I hereby declare that the Project entitled, “Ed-Analytics- Educational Analytics Dashboard” done at R. J. COLLEGE, Ghatkopar(W), Mumbai, has not been in any case duplicated to submit to any other university for the award of any degree. To the best of my Knowledge other than me, No one has submitted to any other University. The Project is done in partial fulfilment of the requirements for the award of degree of Master of Science Data Science and Artificial Intelligence to be submitted as mini project as part of our curriculum. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Index
+
+
+•	Abstract 									
+•	Acknowledge							
+•	Declaration									
+•	Index										6
+Introduction								          7
+Problem Statement 							8
+Dataset							                     8
+Methodology 								10
+Challenges                                                                          		13
+Code 										14
+Output Image 								32
+Future Work									42
+Conclusion									44
+References									45
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introduction
+
+Ed-Analytics is a data science project developed using the Django framework to help teachers and students analyze academic performance. The primary objective of the project is to provide an efficient platform for students, teachers, and administrators to access and evaluate academic data. The project collects data from the R.J.College of students pursuing BAMMC course from the years 2019-2022, which contains 3 years of data.
+
+The project uses data science techniques to process and store the data in an excel file containing five columns, including name, subject, internal marks, external marks, and semester. The data is analyzed and presented in a user-friendly manner to facilitate easy interpretation and understanding.
+
+The project has three types of users: students, teachers, and administrators. Each user type has specific access rights and privileges that enable them to access and analyze data that is relevant to them.
+
+Students can view their performance in the latest semester, including average internal and external marks, bar graphs of their marks in each subject and semester. This feature helps students track their academic progress and identify areas where they need improvement.
+
+Teachers can view the average marks of students in the subject they teach, top 5 most and least scoring students, and bar graphs of all students' marks in their subject. This feature helps teachers identify the strengths and weaknesses of their students and tailor their teaching methods accordingly.
+
+Administrators can view the performance of both students and teachers, total number of students, subjects, average internal and external marks, and an interactive pie chart of subjects in the latest semester. Additionally, admins can manage roles and access rights for different users. This feature enables administrators to maintain the integrity and security of the system.
+
+Problem Statement
+Academic performance analysis is a critical aspect of education that helps both students and teachers identify strengths and weaknesses, make informed decisions, and improve learning outcomes. However, the traditional methods of performance analysis are often time-consuming, cumbersome, and lack real-time insights. This project aims to provide an interactive platform that enables teachers and students to analyze academic performance efficiently and effectively. The platform collects and processes data from R.J.College of students of BAMMC course from the years 2019-2022 and uses data analysis techniques and visualization tools to provide real-time insights into academic performance. The platform's goal is to help students and teachers identify strengths and weaknesses, improve learning outcomes, and make informed decisions based on data-driven insights. The project's problem statement is to create an interactive platform that facilitates academic performance analysis, enhances decision-making, and improves learning outcomes for students and teachers.
+
+Dataset
+The dataset used in the Ed-Analytics project is named stud_cd.csv, which contains data on the academic performance of students in R.J. College pursuing the BAMMC course from the years 2019-2022. The dataset has a total of 5620 rows and includes data on multiple students and subjects across three academic years. The dataset consists of five columns:
+
+•	Name: This column contains the name of the student, represented as a string.
+
+•	Subject: This column contains the subject of the course, represented as a string.
+
+•	Internal Marks: This column contains the internal marks scored by the student in the subject, represented as an integer.
+
+•	External Marks: This column contains the external marks scored by the student in the subject, represented as an integer.
+
+•	Semester: This column contains the semester in which the student took the course, represented as an integer.
+
+The dataset is a comprehensive representation of the academic performance of students at R.J.College, covering three academic years. The dataset is designed to be used as an input for the Ed-Analytics project, which utilizes data science techniques to analyze and present the data in a user-friendly manner.
+ 
+The dataset includes data on unique students, with multiple rows for each student representing their performance in different courses and semesters. The dataset was processed and saved in an Excel file format, which is then used as input for the Ed-Analytics project.
+
+The Ed-Analytics project uses this dataset as its primary data source to generate various visualizations and insights related to student performance. The dataset's size and scope make it ideal for identifying patterns and trends in academic performance across different courses and semesters. The dataset's five columns provide a comprehensive overview of student performance, enabling the Ed-Analytics project to generate detailed reports and visualizations that are relevant to students, teachers, and administrators alike.
+
+Overall, the stud_cd.csv dataset used in the Ed-Analytics project is a rich and comprehensive dataset that provides valuable insights into the academic performance of students at R.J.College. The dataset's size and scope make it ideal for identifying areas for improvement and promoting academic excellence
+
+Methodology The Ed-Analytics project follows a robust and data-driven methodology for analyzing academic performance using the latest data analysis techniques and visualization tools. The project's architecture is based on the Django web framework, which provides a scalable and secure platform for developing web applications.
+
+	The project's methodology starts by collecting data on student performance from the stud_cd.csv dataset, which contains information on the academic performance of students in the BAMMC course at R.J. College for the years 2019-2022. The dataset has five columns, including student name, subject name, internal marks, external marks, and semester, and a total of 5620 rows. The data is processed and saved in an excel file format, which serves as the primary data source for the Ed-Analytics project.
+
+	The project follows a Model-View-Controller (MVC) architecture, with separate modules for data processing, data analysis, and visualization. The data processing module preprocesses the data by cleaning, filtering, and transforming it into a suitable format for analysis. The data analysis module uses various Python libraries, including NumPy, Pandas, Matplotlib, and Seaborn, to analyze student performance data and generate insights into academic performance.
+
+	The visualization module uses various interactive and user-friendly visualization tools, including bar graphs, pie charts, and tables, to present the analysis results visually. The interactive interface of the Ed-Analytics project enables users to navigate and explore data quickly, filter and sort data, and customize visualizations to suit their needs.
+
+	The Ed-Analytics project also includes separate modules for user management, access control, and authentication, ensuring that user data is secure and protected. The project's methodology leverages advanced security features, such as SSL encryption and two-factor authentication, to ensure that user data is protected from unauthorized access.
+
+	Overall, the Ed-Analytics project's methodology uses a data-driven approach to analyze academic performance, leveraging data analysis techniques and visualization tools to provide real-time insights into student performance and facilitate informed decision-making. The project's methodology ensures that user data is secure, accessible, and customizable, providing an efficient and effective platform for academic performance analysis. 
+The Ed-Analytics project utilizes a robust and scalable web development framework called Django to create a seamless and efficient user experience. The project follows a Model-View-Controller (MVC) architecture, with separate modules for data processing, data analysis, visualization, and user management. The project also includes separate modules for access control and authentication, ensuring that user data is protected.
+
+The Django framework provides a powerful toolkit for building web applications with high security and customization. The project includes several apps within the Django framework that work seamlessly together to create a cohesive user experience. These apps include:
+
+Data Processing: This app is responsible for processing the raw student performance data from the stud_cd.csv dataset and storing it in an excel file. The app also includes data validation and cleaning functions to ensure that the data is accurate and consistent.
+
+Data Analysis: This app is responsible for analyzing the processed data and generating various insights and visualizations related to student performance. The app uses Python libraries, including NumPy, Pandas, Matplotlib, and Seaborn, to generate insights into academic performance. The app also includes various visualizations, including bar graphs, pie charts, and tables, to help users analyze academic performance.
+
+User Management: This app is responsible for managing user roles, access rights, and authentication. The app ensures that only authorized users can access sensitive data and perform specific actions. It includes functions for creating user accounts, assigning roles and access rights, and managing passwords.
+
+Frontend: This app is responsible for rendering the user interface and making it interactive. The app includes HTML templates, CSS stylesheets, and JavaScript code to create a seamless user experience. The app enables users to navigate and explore data quickly, filter and sort data, and customize visualizations to suit their needs.
+
+Challenges
+While developing the Ed-Analytics project, we encountered several challenges that required careful consideration and planning. Here are some additional details on the challenges we faced:
+
+Data Quality: To ensure the accuracy and reliability of the visualizations and insights generated by the Ed-Analytics project, we had to overcome several data quality challenges. These included inconsistencies and errors in the data, missing values, and data in different formats. We had to clean and preprocess the data extensively to ensure that it was ready for analysis.
+Security: The Ed-Analytics project deals with sensitive student data, and ensuring the security of user data was a top priority. We implemented several security measures, such as access control, authentication, and data encryption, to ensure that user data was protected and secure.
+User Interface Design: Another significant challenge we faced was designing an intuitive and user-friendly interface that was easy to navigate and understand. We conducted several rounds of user testing and feedback to ensure that the interface was accessible and easy to use for all users, including students, teachers, and administrators.
+Performance: As the dataset used in the project was quite large, ensuring that the application was performant and responsive was a significant challenge. We optimized the data processing and analysis modules to ensure that the application remained fast and responsive even when handling large amounts of data.
+Maintenance: As the project is designed to be used over an extended period, ensuring that the application remains up-to-date and functional was a challenge. We established a maintenance plan and update the project regularly to ensure that it remained compatible with the latest versions of the Python libraries and frameworks.
+In addition to these challenges, we also had to tackle some issues related to the Django framework and different apps. We had to ensure that the different apps in the project were seamlessly integrated, and the user data was consistent across all the modules. We also had to optimize the database queries to reduce the response time of the application.
+Despite these challenges, we were able to develop a robust and scalable platform for analyzing academic performance using data-driven techniques and visualization tools. The Ed-Analytics project provides real-time insights into student performance, enabling informed decision-making and improving educational outcomes.
+
+Future works
+The Ed-Analytics project is a robust and scalable platform for analyzing academic performance using data-driven techniques and visualization tools. However, there are several areas where the project could be extended and improved to provide even more insights into academic performance. Some of the possible areas for future work include:
+
+Incorporating Machine Learning Techniques: One of the most significant areas for future work in the Ed-Analytics project is the incorporation of machine learning techniques. Machine learning algorithms could be used to analyze patterns in academic performance data and provide insights into the factors that influence academic performance. For example, machine learning algorithms could be used to predict the grades of students based on their past performance, demographic data, and other factors.
+
+Integration with Other Data Sources: The Ed-Analytics project could be extended to incorporate data from other sources, such as online learning platforms and social media platforms. The integration of data from multiple sources could provide a more comprehensive picture of academic performance and help identify factors that influence academic performance.
+
+Customizable Visualizations: The project's current visualizations are pre-built and not customizable. In the future, the project could be extended to allow users to create custom visualizations based on their specific needs and preferences. This would provide users with greater flexibility in analyzing academic performance data and enable them to create visualizations that are tailored to their needs.
+
+Real-Time Data Processing: The project's current data processing module requires the data to be manually uploaded and processed. In the future, the project could be extended to support real-time data processing, allowing users to access and analyze academic performance data in real-time.
+
+Collaborative Tools: The project could be extended to include collaborative tools, such as chat rooms and discussion forums, to facilitate collaboration and knowledge sharing among users. Collaborative tools could be used to help teachers and students work together to identify areas where students need additional support and to share best practices for academic success.
+
+Enhanced User Management: The project's current user management module is basic and could be improved to provide more features and functionality. For example, the project could be extended to support role-based access control, allowing administrators to control user access to specific features and modules based on their roles and responsibilities.
+
+Integration with Learning Management Systems: The Ed-Analytics project could be integrated with Learning Management Systems (LMS) to provide seamless access to academic performance data. Integration with LMS could also enable the project to leverage data from LMS to provide more insights into academic performance.
+
+In conclusion, the Ed-Analytics project is a powerful platform for analyzing academic performance using data-driven techniques and visualization tools. However, there are several areas where the project could be extended and improved to provide even more insights into academic performance. The future work described above represents some of the possible areas for future development and improvement.
+
+Conclusion
+The Ed-Analytics project is an essential tool that utilizes data analysis techniques and visualization tools to provide insights into academic performance. It is a powerful platform that helps students, teachers, and administrators identify areas that require additional support to improve academic outcomes.
+
+The project leverages the power of the Django web framework and various Python libraries, including NumPy, Pandas, Matplotlib, and Seaborn, to generate insights into academic performance. It includes various visualizations, such as bar graphs, pie charts, and tables, to help users analyze academic performance and make informed decisions.
+
+Despite the challenges encountered while developing the project, the Ed-Analytics project is a significant step forward in using data-driven techniques to improve academic performance and enhance the educational experience for students. The platform's data-driven approach ensures that insights into academic performance are accurate and reliable, providing users with valuable information for decision-making.
+
+In conclusion, the Ed-Analytics project is an effective tool for analyzing academic performance, and it has the potential to enhance the educational experience for students, teachers, and administrators alike. The project's methodology ensures that user data is secure, accessible, and customizable, providing an efficient and effective platform for academic performance analysis. While there is still room for improvement, the Ed-Analytics project represents a significant achievement in the field of data-driven educational analysis, and it has the potential to revolutionize the way we approach academic performance analysis in the future.
+
+
+
+
+
+
+References
+Django: https://www.djangoproject.com/
+Raniranjan Jhumjhunwala College: https://www.rjcollege.edu.in/
+
